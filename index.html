@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse Decoder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: black;
+            color: rgb(6, 101, 255);
+        }
+        textarea {
+            width: calc(100% - 20px); 
+            height: 100px;
+            margin-bottom: 10px;
+            background-color: white; /* изменение цвета поля ввода на белый */
+            color: black;
+        }
+        button {
+            width: calc(10% - 20px);
+            margin-bottom: 10px;
+            background-color: rgb(229, 0, 0); /* изменение цвета кнопки на зеленый */
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: rgb(1, 128, 1); /* изменение цвета кнопки при наведении */
+        }
+        #translationResult {
+            color: cyan;
+        }
+        .result-text {
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>morse decoder</h1>
+    <textarea id="morseInput" placeholder="Morse text"></textarea>
+    <button onclick="translateMorse()">Decoder</button>
+    <p class="result-text">Result:</p>
+    <div id="translationResult"></div>
+
+    <script>
+        function translateMorse() {
+            const morseInput = document.getElementById('morseInput').value.trim();
+            const words = morseInput.split(' / ');
+            let translation = '';
+            for (let i = 0; i < words.length; i++) {
+                const morseLetters = words[i].split(' ');
+                for (let j = 0; j < morseLetters.length; j++) {
+                    translation += morseToEnglish(morseLetters[j]) || '[?]';
+                }
+                translation += ' ';
+            }
+            document.getElementById('translationResult').textContent = translation;
+        }
+
+        function morseToEnglish(morse) {
+            switch (morse) {
+                case '.-': return 'A';
+                case '-...': return 'B';
+                case '-.-.': return 'C';
+                case '-..': return 'D';
+                case '.': return 'E';
+                case '..-.': return 'F';
+                case '--.': return 'G';
+                case '....': return 'H';
+                case '..': return 'I';
+                case '.---': return 'J';
+                case '-.-': return 'K';
+                case '.-..': return 'L';
+                case '--': return 'M';
+                case '-.': return 'N';
+                case '---': return 'O';
+                case '.--.': return 'P';
+                case '--.-': return 'Q';
+                case '.-.': return 'R';
+                case '...': return 'S';
+                case '-': return 'T';
+                case '..-': return 'U';
+                case '...-': return 'V';
+                case '.--': return 'W';
+                case '-..-': return 'X';
+                case '-.--': return 'Y';
+                case '--..': return 'Z';
+                case '.----': return '1';
+                case '..---': return '2';
+                case '...--': return '3';
+                case '....-': return '4';
+                case '.....': return '5';
+                case '-....': return '6';
+                case '--...': return '7';
+                case '---..': return '8';
+                case '----.': return '9';
+                case '-----': return '0';
+                case '.-.-.-': return '.';
+                case '--..--': return ',';
+                case '-.-.--': return '!';
+                case '..--..': return '?';
+                case '.----.': return '\'';
+                case '/': return ' ';
+                default: return '';
+            }
+        }
+    </script>
+</body>
+</html>
